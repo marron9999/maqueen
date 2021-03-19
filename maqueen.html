@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Maqueen BLE</title>
+	<meta http-equiv="x-ua-compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<script src="maqueen/maqueen.js" type="text/javascript"></script>
+	<script src="maqueen/mbit_maqueen.js" type="text/javascript"></script>
+	<script src="maqueen/mbit_ble.js" type="text/javascript"></script>
+	<script src="maqueen/sound.js" type="text/javascript"></script>
+	<link href="maqueen/ui.css" type="text/css" rel="stylesheet">
+	<script src="maqueen/ui.js" type="text/javascript"></script>
+	<script src="maqueen/ui_sound.js" type="text/javascript"></script>
+	<script src="maqueen/ui_display.js" type="text/javascript"></script>
+	<script src="maqueen/ui_maqueen.js" type="text/javascript"></script>
+	<script src="maqueen/ui_console.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+	<div id=pages>
+		<div id=page style="margin-left:0px;">
+
+			<!-- Page: DISPLAY - LED 5 x 5 -->
+			<div id=display>
+
+				<div id=leds></div>
+				<div style="margin-top:15px;padding-left:20px;">
+					<button class=img onclick="device_leds(2)">&nbsp;<img src=maqueen/icon1.png>&nbsp;</button>
+					<button class=img onclick="device_leds(3)">&nbsp;<img src=maqueen/icon2.png>&nbsp;</button>
+					<button class=img onclick="device_leds(1)">&nbsp;<img src=maqueen/anime.png>&nbsp;</button>
+					<button class=push onclick="device_leds(0)">すべて消す</button>
+				</div>
+				<div style="margin-top:10px;padding-left:20px;"><input id=text type=text value="Maqueen"></div>
+				<div style="margin-top:10px;padding-left:20px;">
+					<button class=push onclick="device_leds(-1)">文字列</button>
+				</div>
+			</div>
+
+			<!-- Page: SOUND - Keyboard -->
+			<div id=sound>
+				<div id=keys>
+					<div id=key></div>
+				</div>
+				<div id=play>
+				</div>
+			</div>
+
+			<!-- Page: MAQUEEN - Operation -->
+			<div id=maqueen style="position:relative;">
+				<div id=maqueen-img style="position:absolute;margin-left:14px;margin-top:45px;width:300px;height:300px;display:inline-block;">
+					<img src=maqueen/full.png>
+					<img id=img_led_left0 src=maqueen/led_l0.png>
+					<img id=img_led_left1 src=maqueen/led_l1.png>
+					<img id=img_led_right0 src=maqueen/led_r0.png>
+					<img id=img_led_right1 src=maqueen/led_r1.png>
+					<img id=img_tire_left1 src=maqueen/tire_fw.png>
+					<img id=img_tire_left2 src=maqueen/tire_bw.png>
+					<img id=img_tire_right1 src=maqueen/tire_fw.png>
+					<img id=img_tire_right2 src=maqueen/tire_bw.png>
+				</div>
+
+				<div style="position:absolute;margin-left:10px;margin-top:30px;width:310px;height:300px;display:inline-block;">
+					<div class="button fw" id=button_forward><img src=maqueen/arrow0.png></div>
+					<div class="button bw" id=button_backward><img src=maqueen/arrow6.png></div>
+					<div class="button tf" id=button_turn1_right><img src=maqueen/arrow0.png style="transform:rotate(60deg);"></div>
+					<div class="button tf" id=button_turn1_left><img src=maqueen/arrow0.png style="transform:rotate(-60deg);"></div>
+					<div class="button tb" id=button_turn2_right><img src=maqueen/arrow6.png style="transform:rotate(-60deg);"></div>
+					<div class="button tb" id=button_turn2_left><img src=maqueen/arrow6.png style="transform:rotate(60deg);"></div>
+					<div class="button tt" id=button_turn3_right><img src=maqueen/arrow.png style="transform:rotate(0deg);"></div>
+					<div class="button tt" id=button_turn3_left><img src=maqueen/arrow.png style="transform:rotate(180deg);"></div>
+				</div>
+
+				<div class=button id=button_led_right onclick="device_led(this)"><img src=maqueen/led-right.png></div>
+				<div class=button id=button_led_left onclick="device_led(this)"><img src=maqueen/led-left.png></div>
+				<div class=circle id=sensor_left2></div>
+				<div class=circle id=sensor_right2></div>
+				<div id=sonic0 nowrap><span class=degit id=sonic2>0</span> cm</div>
+				<div class=degit id=mortor_left2>0</div>
+				<div class=degit id=mortor_right2>0</div>
+				<div id=logo1 onclick="device_auto()"><img src=maqueen/maqueen.png style="height:3em;"></div>
+				<div id=logo2 onclick="device_connect()"><span id=mbit>micro:bit</span></div>
+			</div>
+
+			<!-- Page: CONSOLE - Operation -->
+			<div id=console style="padding-left:10px;">
+				<div class=right id=logx>
+					<div id=log></div>
+				</div>
+
+				<div style="display:inline-block;">
+
+					<div style="height:315px;">
+						<table>
+							<tr>
+								<td nowrap>ライン:</td>
+								<td nowrap><span class=degit><span class=circle id=sensor_left title="左"></span></span>
+									<span class=degit><span class=circle id=sensor_right title="右"></span></span>
+								</td>
+							</tr>
+							<tr>
+								<td nowrap>距離計:</td>
+								<td nowrap><span class=degit id=sonic>0</span> cm</td>
+							</tr>
+							<tr>
+								<td nowrap>LED:</td>
+								<td nowrap><span class=degit><span class=circle id=led_left title="左"></span></span>
+									<span class=degit><span class=circle id=led_right title="右"></span></span>
+								</td>
+							</tr>
+							<tr>
+								<td nowrap>モーター:</td>
+								<td nowrap>
+									<span class=degit id=mortor_left title="左">0</span>
+									<span class=degit id=mortor_right title="右">0</span>
+									<span class=degit id=mortor_speed title="スピード">0</span>
+								</td>
+							</tr>
+							<tr class=mbit1>
+								<td nowrap>ボタン:</td>
+								<td nowrap>
+									<span class=degit id=degit_logo><span class=circle2
+											id=button_logo><img src=maqueen/logo.png></span></span>
+									<span id=degit_ab>
+										<span class=degit><span class=circle id=button_a><img src=maqueen/a.png></span></span>
+										<span class=degit><span class=circle id=button_b><img src=maqueen/b.png></span></span>
+									</span>
+								</td>
+							</tr>
+							<tr class=mbit1>
+								<td nowrap>温度:</td>
+								<td nowrap><span class=degit id=temperature>0</span></td>
+							</tr>
+							<tr class=mbit1>
+								<td nowrap>明るさ:</td>
+								<td nowrap><span class=degit id=light_level>0</span></td>
+							</tr>
+							<tr class=mbit1>
+								<td nowrap>回転:</td>
+								<td nowrap>
+									<span class=degit id=rotate_roll title="ロール">0</span>
+									<span class=degit id=rotate_pitch title="ピッチ">0</span>
+									<!-- <small>[roll, pitch]</small> -->
+								</td>
+							</tr>
+							<tr class=mbit1>
+								<td nowrap>磁力:</td>
+								<td nowrap>
+									<span class=degit id=force_x title="Ｘ">0</span>
+									<span class=degit id=force_y title="Ｙ">0</span>
+									<span class=degit id=force_z title="Ｚ">0</span>
+								</td>
+							</tr>
+							<tr class=mbit1>
+								<td nowrap>加速:</td>
+								<td nowrap>
+									<span class=degit id=accele_x title="Ｘ">0</span>
+									<span class=degit id=accele_y title="Ｙ">0</span>
+									<span class=degit id=accele_z title="Ｚ">0</span>
+								</td>
+							</tr>
+						</table>
+
+						<div style="margin-top:5px;">
+							<div class="options">
+								<span class=req><input type=checkbox class=check checked id=req_sensor>ライン</span>
+								<span class=req><input type=checkbox class=check id=req_sonic>距離</span>
+							</div>
+							<div class="mbit2 options">
+								<span class=req><input type=checkbox class=check id=req_button>ボタン</span>
+								<span class=req><input type=checkbox class=check id=req_temp>温度</span>
+								<span class=req><input type=checkbox class=check id=req_light>明るさ</span>
+							</div>
+							<div class="mbit2 options">
+								<span class=req><input type=checkbox class=check id=req_rotate>回転</span>
+								<span class=req><input type=checkbox class=check id=req_force>磁力</span>
+								<span class=req><input type=checkbox class=check id=req_accele>加速</span>
+							</div>
+							<div class=options>
+								<span class=req><input type=checkbox class=check checked id=req_autoline>黒維持</span>
+								<span class=req><input type=checkbox class=check checked id=req_autotone>旋回音</span>
+								<span class=req><input type=checkbox class=check checked id=req_autoled>旋回灯</span>
+							</div>
+							<div class=options style="margin-top:5px;">
+								<span class=req><input type=checkbox class=check id=req_debug>ログ(デバッグ)</span>
+							</div>
+						</div>
+
+					</div>
+
+					<div style="margin-top:5px;"><input id=ope type=text></div>
+
+				</div>
+
+				<div style="margin-top:5px; position:relative;width:320px;">
+					<button class=push id=conn onclick="device_connect()">接続</button>
+					<button class=push onclick="device_ope()">命令</button>
+					&nbsp;<button class=push onclick="device_speed(-10)">遅</button>
+					<button class=push onclick="device_speed(-1)">－</button>
+					<button class=push onclick="device_speed(1)">＋</button>
+					<button class=push onclick="device_speed(10)">速</button>
+					&nbsp;<button class=push id=auto onclick="device_auto()">自動</button>
+					&nbsp;<button class=push onclick="device_cls()">ログ</button>
+				</div>
+			</div>
+
+			<div id=prev onclick="device_prev()"><span>&lt;</span></div>
+			<div id=cent onclick="device_cent()"><span>&gt;<span></div>
+			<div id=next onclick="device_next()"><span>&gt;<span></div>
+		</div>
+
+	</div>
+</body>
+
+</html>
