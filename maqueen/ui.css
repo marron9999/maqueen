@@ -20,7 +20,7 @@ body {
 #pages {
 	overflow: hidden;
 	width:1300px;
-	height:400px;
+	height:420px;
 	display: inline-block;
 }
 @media screen and (max-width: 1300px) {
@@ -41,13 +41,13 @@ body {
 #page {
 	white-space: nowrap;
 	width:1300px;
-	height:380px;
+	height:430px;
 	position: relative;
 }
 
 #maqueen, #display, #sound, #console {
 	width: 320px;
-	height: 380px;
+	height: 440px;
 	display: inline-block;
 	float: left;
 	position: relative;
@@ -55,11 +55,11 @@ body {
 }
 #maqueen, #console {
 	padding-top: 5px;
-	height: 375px;
+	height: 425px;
 }
 #prev, #cent, #next {
 	width: 20px;
-	height: 380px;
+	height: 530px;
 	top: 0;
 	position: absolute;
 	z-index: 2;
@@ -136,7 +136,7 @@ button.img img {
 	margin-bottom: 10px;
 	vertical-align: top;
 	padding: 0;
-	height: 340px;
+	height: 375px;
 	overflow-y: auto;
 	width: 140px;
 	word-break: break-all;
@@ -247,7 +247,7 @@ button.img img {
 	position: absolute;
 	padding-right:40px;
 	left: 15px;
-	bottom:0;
+	bottom:25px;
 }
 #play > button,
 #play2 > button  {
@@ -400,17 +400,17 @@ button.img img {
 
 #sensor_left2 {
 	position: absolute;
-	top: 30px;
+	top: 40px;
 	left: 100px;
 }
 #sensor_right2 {
 	position: absolute;
-	top: 30px;
+	top: 40px;
 	right: 100px;
 }
 #sonic0 {
 	position: absolute;
-	top: 28px;
+	top: 40px;
 	left: 100px;
 	width: 90px;
 	text-align: right;
@@ -420,12 +420,12 @@ button.img img {
 }
 #mortor_left2 {
 	position: absolute;
-	bottom:15px;
+	bottom:40px;
 	left: -5px;
 }
 #mortor_right2 {
 	position: absolute;
-	bottom:15px;
+	bottom:40px;
 	right: 25px;
 }
 

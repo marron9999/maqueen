@@ -53,17 +53,13 @@ var SOUND = {
 	//		"ソ:ソ:ラ:シ:ラ .レ.ラ:ラ:シ:レ:ラ",
 	//	],
 
-	playList: function() {
-		return ["チューリップ", "どんぐりころころ",
-				"静かな湖畔", "さくらさくら"];
-	},
-	play2List: function() {
-		return [["クスクス笑う", "giggle"], ["ハッピー", "happy"],
+	playList: ["チューリップ", "どんぐりころころ",
+				"静かな湖畔", "さくらさくら"],
+	play2List: [["クスクス笑う", "giggle"], ["ハッピー", "happy"],
 				["ハロー", "hello"], ["神秘的", "mysterious"],
 				["寂しい", "sad"], ["スライド", "slide"],
 				["急上昇", "soaring"], ["春", "spring"],
-				["きらめく", "twinkle"], ["あくび", "yawn"],];
-	},
+				["きらめく", "twinkle"], ["あくび", "yawn"],],
 
 	values: function (data) {
 		let val = [], len = [], key = [];

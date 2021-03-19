@@ -24,18 +24,16 @@ function device_sound() {
 	selector("#key").innerHTML = v;
 
 	v = "";
-	for (n in SOUND) {
-		if (n == "label") continue;
-		if (n == "value") continue;
-		if (n == "values") continue;
-		v += ' <button class=push onclick="device_play(this)">' + n + '</button>';
+	for (let i=0; i<SOUND.playList.length; i++) {
+		v += ' <button class=push onclick="device_play(this)">'
+				+ SOUND.playList[i] + '</button>';
 	}
 	v += "<span id=plaing></span>";
 	v += "<span id=play2><br>";
-	ee = ["giggle", "happy", "hello", "mysterious", "sad",
-		"slide", "soaring", "spring", "twinkle", "yawn",];
-	for (let i = 0; i < ee.length; i++) {
-		v += ' <button class=push onclick="device_play2(this)">' + ee[i] + '</button>';
+	for (let i=0; i<SOUND.play2List.length; i++) {
+		v += ' <button class=push onclick="device_play2(\''
+				+ SOUND.play2List[i][1] + '\')">'
+				+ SOUND.play2List[i][0] + '</button>';
 	}
 	v += "</span>";
 	selector("#play").innerHTML = v;
