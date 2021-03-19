@@ -51,7 +51,6 @@ async function device_key(e) {
 }
 
 async function device_play2(e) {
-	e = e.id;
 	await MAQUEEN.post({ express: e });
 }
 
