@@ -92,29 +92,34 @@ async function device_play_() {
 		return;
 	}
 	_device_play.j++;
+	let s = 70;
 	let e = document.getElementById("" + key);
 	let f = function () { e.style.background = null; };
 	if (e != undefined)
 		e.style.background = "rgba(0,255,0,0.2)";
 	if (len == 1) {
+		s += parseInt(1000 / 16);
 		await MAQUEEN.post({ sound: val });
-		if (e != undefined) setTimeout(f, parseInt(1000 / 16));
-		setTimeout(device_play_, parseInt(1000 / 16));
+		if (e != undefined) setTimeout(f, s);
+		setTimeout(device_play_, s);
 		return;
 	}
 	if (len == 2) {
+		s += parseInt(1000 / 8);
 		await MAQUEEN.post({ sound8: val });
-		if (e != undefined) setTimeout(f, parseInt(1000 / 8));
-		setTimeout(device_play_, parseInt(1000 / 8));
+		if (e != undefined) setTimeout(f, s);
+		setTimeout(device_play_, s);
 		return;
 	}
 	if (len == 8) {
+		s += parseInt(1000 / 2);
 		await MAQUEEN.post({ sound2: val });
-		if (e != undefined) setTimeout(f, parseInt(1000 / 2));
-		setTimeout(device_play_, parseInt(1000 / 2));
+		if (e != undefined) setTimeout(f, s);
+		setTimeout(device_play_, s);
 		return;
 	}
+	s += parseInt(1000 / 4);
 	await MAQUEEN.post({ sound4: val });
-	if (e != undefined) setTimeout(f, parseInt(1000 / 4));
-	setTimeout(device_play_, parseInt(1000 / 4));
+	if (e != undefined) setTimeout(f, s);
+	setTimeout(device_play_, s);
 }
